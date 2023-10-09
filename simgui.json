@@ -46,6 +46,11 @@
       "/SmartDashboard/navX-Sensor[1]": "Gyro"
     },
     "windows": {
+      "/FMSInfo": {
+        "window": {
+          "visible": true
+        }
+      },
       "/SmartDashboard/Field": {
         "XModules": {
           "arrowColor": [
@@ -61,11 +66,19 @@
         "window": {
           "visible": true
         }
+      },
+      "/SmartDashboard/navX-Sensor[1]": {
+        "window": {
+          "visible": true
+        }
       }
     }
   },
   "NetworkTables": {
     "transitory": {
+      "Shuffleboard": {
+        "open": true
+      },
       "SmartDashboard": {
         "open": true,
         "swerve": {

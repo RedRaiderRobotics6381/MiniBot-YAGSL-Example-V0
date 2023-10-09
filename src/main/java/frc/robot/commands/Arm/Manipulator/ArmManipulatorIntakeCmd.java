@@ -24,11 +24,11 @@ public class ArmManipulatorIntakeCmd extends CommandBase {
     public void execute() {
         P = ((Math.abs(rotateSubsystem.armRotateEncoder.getPosition() - ArmConstants.posIntake)+30)/300);
         if(rotateSubsystem.armRotateEncoder.getPosition() > ArmConstants.posIntake + ArmConstants.rotateoffset){
-            rotateSubsystem.armRotateMotor.set(-ArmConstants.rotateSpeed * P);
+            rotateSubsystem.armRotateMotor.set(-ArmConstants.rotateSpeed * P*.75);
             // System.out.println("up");
            }
            if(rotateSubsystem.armRotateEncoder.getPosition() < ArmConstants.posIntake - ArmConstants.rotateoffset){
-            rotateSubsystem.armRotateMotor.set(ArmConstants.rotateSpeed * P);
+            rotateSubsystem.armRotateMotor.set(ArmConstants.rotateSpeed * P*.75);
             // System.out.println("down");
            }
     }
@@ -36,7 +36,6 @@ public class ArmManipulatorIntakeCmd extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         rotateSubsystem.armRotateMotor.set(ArmConstants.posIntakeGravity);
-
         Constants.ArmConstants.manipulatorOn = false;
     }
 
