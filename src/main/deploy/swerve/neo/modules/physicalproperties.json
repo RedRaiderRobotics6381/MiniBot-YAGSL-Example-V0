@@ -14,7 +14,7 @@
   },
   "encoderPulsePerRotation": {
     "drive": 1,
-    "angle": 360
+    "angle": 1
   },
   "wheelGripCoefficientOfFriction": 1.19
 }
