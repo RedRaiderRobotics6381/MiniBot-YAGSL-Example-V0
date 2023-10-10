@@ -9,23 +9,23 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+// import edu.wpi.first.wpilibj2.command.Commands;
+// import edu.wpi.first.wpilibj2.command.InstantCommand;
 //import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+// import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Arm.Intake.ArmIntakeInCmd;
-import frc.robot.commands.Arm.Intake.ArmIntakeOutCmd;
-import frc.robot.commands.Arm.Manipulator.ArmManipulatorDriveCmd;
-import frc.robot.commands.Arm.Manipulator.ArmManipulatorIntakeCmd;
+// import frc.robot.commands.Arm.Intake.ArmIntakeInCmd;
+// import frc.robot.commands.Arm.Intake.ArmIntakeOutCmd;
+// import frc.robot.commands.Arm.Manipulator.ArmManipulatorDriveCmd;
+// import frc.robot.commands.Arm.Manipulator.ArmManipulatorIntakeCmd;
 import frc.robot.commands.swervedrive.auto.Autos;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteDrive;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteFieldDrive;
 import frc.robot.commands.swervedrive.drivebase.TeleopDrive;
-import frc.robot.subsystems.Secondary.ArmSubsystem;
-import frc.robot.subsystems.Secondary.RotateSubsystem;
+// import frc.robot.subsystems.Secondary.ArmSubsystem;
+// import frc.robot.subsystems.Secondary.RotateSubsystem;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 
@@ -46,10 +46,10 @@ public class RobotContainer
 
   // CommandJoystick driverController   = new CommandJoystick(3);//(OperatorConstants.DRIVER_CONTROLLER_PORT);
   XboxController driverXbox = new XboxController(0);
-  public final static XboxController secondaryJoystick = new XboxController(1);
+  // public final static XboxController secondaryJoystick = new XboxController(1);
 
-  public final static ArmSubsystem armSubsystem = new ArmSubsystem();
-  public final static RotateSubsystem rotateSubsystem = new RotateSubsystem();
+  // public final static ArmSubsystem armSubsystem = new ArmSubsystem();
+  // public final static RotateSubsystem rotateSubsystem = new RotateSubsystem();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -83,13 +83,13 @@ public class RobotContainer
                                                                                  OperatorConstants.LEFT_Y_DEADBAND),
                                                     () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
                                                                                  OperatorConstants.LEFT_X_DEADBAND),
-                                                    () -> driverXbox.getRawAxis(4), () -> true, false, true);
+                                                    () -> driverXbox.getRawAxis(4), () -> true, false, false); //headingCorrection was true
     TeleopDrive closedFieldRel = new TeleopDrive(drivebase,
       () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
       OperatorConstants.LEFT_Y_DEADBAND),
       () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
       OperatorConstants.LEFT_X_DEADBAND),
-      () -> driverXbox.getRawAxis(4), () -> true, false, true);
+      () -> driverXbox.getRawAxis(4), () -> true, false, false); //headingCorrection was true
       // () -> MathUtil.applyDeadband(driverController.getY(), OperatorConstants.LEFT_Y_DEADBAND),
       // () -> MathUtil.applyDeadband(driverController.getX(), OperatorConstants.LEFT_X_DEADBAND),
       // () -> -driverController.getRawAxis(3), () -> true, false, true);
@@ -108,18 +108,18 @@ public class RobotContainer
   {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
-    new JoystickButton(driverXbox, 1).onTrue((new InstantCommand(drivebase::zeroGyro)));
-    new JoystickButton(driverXbox, 3).onTrue(new InstantCommand(drivebase::addFakeVisionReading));
+    // new JoystickButton(driverXbox, 1).onTrue((new InstantCommand(drivebase::zeroGyro)));
+    // new JoystickButton(driverXbox, 3).onTrue(new InstantCommand(drivebase::addFakeVisionReading));
 //    new JoystickButton(driverXbox, 3).whileTrue(new RepeatCommand(new InstantCommand(drivebase::lock, drivebase)));
 
     // Secondary
 
-    new JoystickButton(secondaryJoystick, 1).onTrue(Commands.parallel(new ArmManipulatorDriveCmd(rotateSubsystem)));
-    new JoystickButton(secondaryJoystick, 4).onTrue(Commands.parallel(new ArmManipulatorIntakeCmd(rotateSubsystem)));
+    // new JoystickButton(secondaryJoystick, 1).onTrue(Commands.parallel(new ArmManipulatorDriveCmd(rotateSubsystem)));
+    // new JoystickButton(secondaryJoystick, 4).onTrue(Commands.parallel(new ArmManipulatorIntakeCmd(rotateSubsystem)));
     
 
-    new JoystickButton(secondaryJoystick, 3).whileTrue(new ArmIntakeInCmd(armSubsystem));
-    new JoystickButton(secondaryJoystick, 2).whileTrue(new ArmIntakeOutCmd(armSubsystem));
+    // new JoystickButton(secondaryJoystick, 3).whileTrue(new ArmIntakeInCmd(armSubsystem));
+    // new JoystickButton(secondaryJoystick, 2).whileTrue(new ArmIntakeOutCmd(armSubsystem));
 
     
     // new JoystickButton(secondaryJoystick, 9).onTrue(Commands.parallel(new ArmSliderBottomCmd(armSubsystem),
