@@ -6,7 +6,7 @@
     "id": null,
     "canbus": "kMPX"
   },
-  "invertedIMU": true,
+  "invertedIMU": false,
   "modules": [
     "frontleft.json",
     "frontright.json",
