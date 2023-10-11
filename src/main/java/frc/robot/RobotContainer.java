@@ -120,23 +120,17 @@ public class RobotContainer
 
 
     TeleopDrive closedFieldRel = new TeleopDrive(drivebase,
-                                                    () -> MathUtil.applyDeadband(-driverXbox.getLeftY(),
-                                                                                  OperatorConstants.LEFT_Y_DEADBAND),
-                                                    () -> MathUtil.applyDeadband(-driverXbox.getLeftX(),
-                                                                                  OperatorConstants.LEFT_X_DEADBAND),
-                                                    () -> MathUtil.applyDeadband(-driverXbox.getRightX(),
-                                                                                  OperatorConstants.LEFT_X_DEADBAND),
-                                                    () -> true, false, false); //headingCorrection was true
-
-    // TeleopDrive closedFieldRel = new TeleopDrive(drivebase,
-    //                                                 () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
-    //                                                                               OperatorConstants.LEFT_Y_DEADBAND),
-    //                                                 () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
-    //                                                                               OperatorConstants.LEFT_X_DEADBAND),
-    //                                                 () -> MathUtil.applyDeadband(driverXbox.getRightX(),
-    //                                                                               OperatorConstants.LEFT_X_DEADBAND),
-    //                                                 () -> true, false, true);
-
+      () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
+      OperatorConstants.LEFT_Y_DEADBAND),
+      () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
+      OperatorConstants.LEFT_X_DEADBAND),
+      () -> MathUtil.applyDeadband(driverXbox.getRightX(),
+      OperatorConstants.LEFT_X_DEADBAND),
+() -> true, false, false); //headingCorrection was true
+      //() -> driverXbox.getRawAxis(4), () -> true, false, false); //headingCorrection was true
+      // () -> MathUtil.applyDeadband(driverController.getY(), OperatorConstants.LEFT_Y_DEADBAND),
+      // () -> MathUtil.applyDeadband(driverController.getX(), OperatorConstants.LEFT_X_DEADBAND),
+      // () -> -driverController.getRawAxis(3), () -> true, false, true);
 
     drivebase.setDefaultCommand(!RobotBase.isSimulation() ? closedAbsoluteDrive : closedFieldAbsoluteDrive);
   }
