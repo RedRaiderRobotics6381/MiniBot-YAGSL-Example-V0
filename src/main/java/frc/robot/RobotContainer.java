@@ -59,54 +59,84 @@ public class RobotContainer
     // Configure the trigger bindings
     configureBindings();
 
+    // AbsoluteDrive closedAbsoluteDrive = new AbsoluteDrive(drivebase,
+    //                                                       // Applies deadbands and inverts controls because joysticks
+    //                                                       // are back-right positive while robot
+    //                                                       // controls are front-left positive
+    //                                                       () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
+    //                                                                                    OperatorConstants.LEFT_Y_DEADBAND),
+    //                                                       () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
+    //                                                                                    OperatorConstants.LEFT_X_DEADBAND),
+    //                                                       () -> MathUtil.applyDeadband(driverXbox.getRightX(),
+    //                                                                                    OperatorConstants.LEFT_X_DEADBAND),
+    //                                                       () -> MathUtil.applyDeadband(driverXbox.getRightY(),
+    //                                                                                    OperatorConstants.LEFT_Y_DEADBAND),                                                          
+    //                                                       false);
     AbsoluteDrive closedAbsoluteDrive = new AbsoluteDrive(drivebase,
                                                           // Applies deadbands and inverts controls because joysticks
                                                           // are back-right positive while robot
                                                           // controls are front-left positive
-                                                          () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
+                                                          () -> MathUtil.applyDeadband(-driverXbox.getLeftY(),
                                                                                        OperatorConstants.LEFT_Y_DEADBAND),
-                                                          () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
+                                                          () -> MathUtil.applyDeadband(-driverXbox.getLeftX(),
                                                                                        OperatorConstants.LEFT_X_DEADBAND),
-                                                          () -> MathUtil.applyDeadband(driverXbox.getRightX(),
-                                                                                       OperatorConstants.LEFT_X_DEADBAND),
-                                                          () -> MathUtil.applyDeadband(driverXbox.getRightY(),
-                                                                                       OperatorConstants.LEFT_Y_DEADBAND),                                                          
+                                                                                       () -> -driverXbox.getRightX(),
+                                                          () -> -driverXbox.getRightY(),
                                                           false);
-                                                          //                              () -> -driverXbox.getRightX(),
-                                                          // () -> -driverXbox.getRightY(),
-                                                          // false);
+
+    // AbsoluteFieldDrive closedFieldAbsoluteDrive = new AbsoluteFieldDrive(drivebase,
+    //                                                                      () ->
+    //                                                                          MathUtil.applyDeadband(driverXbox.getLeftY(),
+    //                                                                                                 OperatorConstants.LEFT_Y_DEADBAND),
+    //                                                                      () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
+    //                                                                                                   OperatorConstants.LEFT_X_DEADBAND),
+    //                                                                      () -> MathUtil.applyDeadband(driverXbox.getRightX(),
+    //                                                                                                   OperatorConstants.LEFT_X_DEADBAND),
+    //                                                                                                   false);
 
     AbsoluteFieldDrive closedFieldAbsoluteDrive = new AbsoluteFieldDrive(drivebase,
                                                                          () ->
-                                                                             MathUtil.applyDeadband(driverXbox.getLeftY(),
+                                                                             MathUtil.applyDeadband(-driverXbox.getLeftY(),
                                                                                                     OperatorConstants.LEFT_Y_DEADBAND),
-                                                                         () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
+                                                                         () -> MathUtil.applyDeadband(-driverXbox.getLeftX(),
                                                                                                       OperatorConstants.LEFT_X_DEADBAND),
-                                                                         () -> MathUtil.applyDeadband(driverXbox.getRightX(),
-                                                                                                      OperatorConstants.LEFT_X_DEADBAND),
-                                                                                                      false);
-                                                                         //() -> driverXbox.getRawAxis(4), false);
+                                                                         () -> -driverXbox.getRawAxis(4), false);
+
     TeleopDrive simClosedFieldRel = new TeleopDrive(drivebase,
-                                                    () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
+                                                    () -> MathUtil.applyDeadband(-driverXbox.getLeftY(),
                                                                                  OperatorConstants.LEFT_Y_DEADBAND),
-                                                    () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
+                                                    () -> MathUtil.applyDeadband(-driverXbox.getLeftX(),
                                                                                  OperatorConstants.LEFT_X_DEADBAND),
-                                                    () -> MathUtil.applyDeadband(driverXbox.getRightX(),
-                                                                                 OperatorConstants.LEFT_X_DEADBAND),
-                                                    () -> true, false, false); //headingCorrection was true
-                                                    //() -> driverXbox.getRawAxis(4), () -> true, false, false); //headingCorrection was true
+                                                    () -> -driverXbox.getRawAxis(4), () -> true, false, false); //headingCorrection was true
+
+    // TeleopDrive simClosedFieldRel = new TeleopDrive(drivebase,
+    //                                                 () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
+    //                                                                              OperatorConstants.LEFT_Y_DEADBAND),
+    //                                                 () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
+    //                                                                              OperatorConstants.LEFT_X_DEADBAND),
+    //                                                 () -> MathUtil.applyDeadband(driverXbox.getRightX(),
+    //                                                                              OperatorConstants.LEFT_X_DEADBAND),
+    //                                                 () -> true, false, false); //headingCorrection was true
+
+
     TeleopDrive closedFieldRel = new TeleopDrive(drivebase,
-      () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
-      OperatorConstants.LEFT_Y_DEADBAND),
-      () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
-      OperatorConstants.LEFT_X_DEADBAND),
-      () -> MathUtil.applyDeadband(driverXbox.getRightX(),
-      OperatorConstants.LEFT_X_DEADBAND),
-() -> true, false, false); //headingCorrection was true
-      //() -> driverXbox.getRawAxis(4), () -> true, false, false); //headingCorrection was true
-      // () -> MathUtil.applyDeadband(driverController.getY(), OperatorConstants.LEFT_Y_DEADBAND),
-      // () -> MathUtil.applyDeadband(driverController.getX(), OperatorConstants.LEFT_X_DEADBAND),
-      // () -> -driverController.getRawAxis(3), () -> true, false, true);
+                                                    () -> MathUtil.applyDeadband(-driverXbox.getLeftY(),
+                                                                                  OperatorConstants.LEFT_Y_DEADBAND),
+                                                    () -> MathUtil.applyDeadband(-driverXbox.getLeftX(),
+                                                                                  OperatorConstants.LEFT_X_DEADBAND),
+                                                    () -> MathUtil.applyDeadband(-driverXbox.getRightX(),
+                                                                                  OperatorConstants.LEFT_X_DEADBAND),
+                                                    () -> true, false, false); //headingCorrection was true
+
+    // TeleopDrive closedFieldRel = new TeleopDrive(drivebase,
+    //                                                 () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
+    //                                                                               OperatorConstants.LEFT_Y_DEADBAND),
+    //                                                 () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
+    //                                                                               OperatorConstants.LEFT_X_DEADBAND),
+    //                                                 () -> MathUtil.applyDeadband(driverXbox.getRightX(),
+    //                                                                               OperatorConstants.LEFT_X_DEADBAND),
+    //                                                 () -> true, false, true);
+
 
     drivebase.setDefaultCommand(!RobotBase.isSimulation() ? closedAbsoluteDrive : closedFieldAbsoluteDrive);
   }
