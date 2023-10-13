@@ -21,8 +21,8 @@ import frc.robot.Constants.OperatorConstants;
 // import frc.robot.commands.Arm.Manipulator.ArmManipulatorDriveCmd;
 // import frc.robot.commands.Arm.Manipulator.ArmManipulatorIntakeCmd;
 import frc.robot.commands.swervedrive.auto.Autos;
-//import frc.robot.commands.swervedrive.drivebase.AbsoluteDrive;
-//import frc.robot.commands.swervedrive.drivebase.AbsoluteFieldDrive;
+import frc.robot.commands.swervedrive.drivebase.AbsoluteDrive;
+import frc.robot.commands.swervedrive.drivebase.AbsoluteFieldDrive;
 import frc.robot.commands.swervedrive.drivebase.TeleopDrive;
 // import frc.robot.subsystems.Secondary.ArmSubsystem;
 // import frc.robot.subsystems.Secondary.RotateSubsystem;
@@ -59,21 +59,21 @@ public class RobotContainer
     // Configure the trigger bindings
     configureBindings();
 
-    // AbsoluteDrive closedAbsoluteDrive = new AbsoluteDrive(drivebase,
-    //   // Applies deadbands and inverts controls because joysticks
-    //   // are back-right positive while robot
-    //   // controls are front-left positive
-    //   () -> MathUtil.applyDeadband(-driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
-    //   () -> MathUtil.applyDeadband(-driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
-    //   () -> -driverXbox.getRightX(),
-    //   () -> -driverXbox.getRightX(),                                                          
-    //   false);
+    AbsoluteDrive closedAbsoluteDrive = new AbsoluteDrive(drivebase,
+      // Applies deadbands and inverts controls because joysticks
+      // are back-right positive while robot
+      // controls are front-left positive
+      () -> MathUtil.applyDeadband(-driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
+      () -> MathUtil.applyDeadband(-driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
+      () -> -driverXbox.getRawAxis(4),// -driverXbox.getRightY(),
+      () -> -driverXbox.getRawAxis(5),//-driverXbox.getRightX(),                                                          
+      false);
 
-    // AbsoluteFieldDrive closedFieldAbsoluteDrive = new AbsoluteFieldDrive(drivebase,
-    //   () -> MathUtil.applyDeadband(-driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
-    //   () -> MathUtil.applyDeadband(-driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
-    //   () -> -driverXbox.getRightX(),
-    //   false);
+    AbsoluteFieldDrive closedFieldAbsoluteDrive = new AbsoluteFieldDrive(drivebase,
+      () -> MathUtil.applyDeadband(-driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
+      () -> MathUtil.applyDeadband(-driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
+      () -> -driverXbox.getRightX(),
+      false);
 
     TeleopDrive simClosedFieldRel = new TeleopDrive(drivebase,
       () -> MathUtil.applyDeadband(-driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
@@ -88,6 +88,7 @@ public class RobotContainer
       () -> true, false, false);
 
     drivebase.setDefaultCommand(!RobotBase.isSimulation() ? closedFieldRel : simClosedFieldRel);
+    //drivebase.setDefaultCommand(!RobotBase.isSimulation() ? closedFieldAbsoluteDrive : closedAbsoluteDrive);
   }
 
   /**
