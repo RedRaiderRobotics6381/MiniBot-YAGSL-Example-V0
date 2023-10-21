@@ -66,7 +66,7 @@ public class LimelightScoring extends SubsystemBase {
     ShuffleboardTab tab;
     tab = Shuffleboard.getTab(LIMELIGHTNAME);
 
-    LLFeed = new HttpCamera(LIMELIGHTNAME, "http://10.17.32.11:5800/stream.mjpg");
+    LLFeed = new HttpCamera(LIMELIGHTNAME, "http://10.63.81.11:5800/stream.mjpg");
     server = CameraServer.addSwitchedCamera("Object Camera");
     server.setSource(LLFeed);
     LLFeed.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
