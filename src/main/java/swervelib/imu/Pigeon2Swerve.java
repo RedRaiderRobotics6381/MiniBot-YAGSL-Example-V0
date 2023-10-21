@@ -31,7 +31,7 @@ public class Pigeon2Swerve extends SwerveIMU
    */
   public Pigeon2Swerve(int canid, String canbus)
   {
-    imu = new WPI_Pigeon2(canid, canbus);
+    imu = new WPI_Pigeon2(20, "canivore");
     Pigeon2Configuration config = new Pigeon2Configuration();
     imu.configAllSettings(config);
     SmartDashboard.putData(imu);
@@ -44,7 +44,7 @@ public class Pigeon2Swerve extends SwerveIMU
    */
   public Pigeon2Swerve(int canid)
   {
-    this(canid, "");
+    this(20, "canivore");
   }
 
   /**

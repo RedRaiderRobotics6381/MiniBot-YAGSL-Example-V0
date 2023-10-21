@@ -1,23 +1,23 @@
 package swervelib.parser.json;
 
 import com.revrobotics.SparkMaxRelativeEncoder.Type;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.SerialPort.Port;
+// import edu.wpi.first.wpilibj.DriverStation;
+// import edu.wpi.first.wpilibj.I2C;
+// import edu.wpi.first.wpilibj.SPI;
+// import edu.wpi.first.wpilibj.SerialPort.Port;
 import swervelib.encoders.AnalogAbsoluteEncoderSwerve;
 import swervelib.encoders.CANCoderSwerve;
 import swervelib.encoders.CanAndCoderSwerve;
 import swervelib.encoders.PWMDutyCycleEncoderSwerve;
 import swervelib.encoders.SparkMaxEncoderSwerve;
 import swervelib.encoders.SwerveAbsoluteEncoder;
-import swervelib.imu.ADIS16448Swerve;
-import swervelib.imu.ADIS16470Swerve;
-import swervelib.imu.ADXRS450Swerve;
-import swervelib.imu.AnalogGyroSwerve;
-import swervelib.imu.NavXSwerve;
+// import swervelib.imu.ADIS16448Swerve;
+// import swervelib.imu.ADIS16470Swerve;
+// import swervelib.imu.ADXRS450Swerve;
+// import swervelib.imu.AnalogGyroSwerve;
+// import swervelib.imu.NavXSwerve;
 import swervelib.imu.Pigeon2Swerve;
-import swervelib.imu.PigeonSwerve;
+// import swervelib.imu.PigeonSwerve;
 import swervelib.imu.SwerveIMU;
 import swervelib.motors.SparkMaxBrushedMotorSwerve;
 import swervelib.motors.SparkMaxSwerve;
@@ -89,32 +89,32 @@ public class DeviceJson
   {
     switch (type)
     {
-      case "adis16448":
-        return new ADIS16448Swerve();
-      case "adis16470":
-        return new ADIS16470Swerve();
-      case "adxrs450":
-        return new ADXRS450Swerve();
-      case "analog":
-        return new AnalogGyroSwerve(id);
-      case "navx_spi":
-        return new NavXSwerve(SPI.Port.kMXP);
-      case "navx_i2c":
-        DriverStation.reportWarning(
-            "WARNING: There exists an I2C lockup issue on the roboRIO that could occur, more information here: " +
-            "\nhttps://docs.wpilib.org/en/stable/docs/yearly-overview/known-issues" +
-            ".html#onboard-i2c-causing-system-lockups",
-            false);
-        return new NavXSwerve(I2C.Port.kMXP);
-      case "navx_onborard":
-        return new NavXSwerve(Port.kOnboard);
-      case "navx_usb":
-        return new NavXSwerve(Port.kUSB);
-      case "navx_mxp":
-      case "navx":
-        return new NavXSwerve(Port.kMXP);
-      case "pigeon":
-        return new PigeonSwerve(id);
+      // case "adis16448":
+      //   return new ADIS16448Swerve();
+      // case "adis16470":
+      //   return new ADIS16470Swerve();
+      // case "adxrs450":
+      //   return new ADXRS450Swerve();
+      // case "analog":
+      //   return new AnalogGyroSwerve(id);
+      // case "navx_spi":
+      //   return new NavXSwerve(SPI.Port.kMXP);
+      // case "navx_i2c":
+      //   DriverStation.reportWarning(
+      //       "WARNING: There exists an I2C lockup issue on the roboRIO that could occur, more information here: " +
+      //       "\nhttps://docs.wpilib.org/en/stable/docs/yearly-overview/known-issues" +
+      //       ".html#onboard-i2c-causing-system-lockups",
+      //       false);
+      //   return new NavXSwerve(I2C.Port.kMXP);
+      // case "navx_onborard":
+      //   return new NavXSwerve(Port.kOnboard);
+      // case "navx_usb":
+      //   return new NavXSwerve(Port.kUSB);
+      // case "navx_mxp":
+      // case "navx":
+      //   return new NavXSwerve(Port.kMXP);
+      // case "pigeon":
+      //   return new PigeonSwerve(id);
       case "pigeon2":
         return new Pigeon2Swerve(id, canbus != null ? canbus : "");
       default:

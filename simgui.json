@@ -79,11 +79,6 @@
         "window": {
           "visible": true
         }
-      },
-      "/SmartDashboard/navX-Sensor[1]": {
-        "window": {
-          "visible": true
-        }
       }
     }
   },
@@ -110,14 +105,19 @@
     }
   },
   "NetworkTables Info": {
+    "Clients": {
+      "open": true
+    },
+    "Connections": {
+      "open": true
+    },
     "Server": {
       "Publishers": {
         "open": true
       },
       "Subscribers": {
         "open": true
-      },
-      "open": true
+      }
     },
     "visible": true
   }
