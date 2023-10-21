@@ -24,6 +24,12 @@ import frc.robot.commands.swervedrive.auto.Autos;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteDrive;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteFieldDrive;
 import frc.robot.commands.swervedrive.drivebase.TeleopDrive;
+import frc.robot.commands.DefaultCommands.DefaultLimelightObjectDectionCommand;
+import frc.robot.commands.DefaultCommands.DefaultLimelightScoringDectionCommand;
+import frc.robot.subsystems.LimelightHelpers;
+import frc.robot.subsystems.LimelightObjectDetection;
+import frc.robot.subsystems.LimelightScoring;
+
 // import frc.robot.subsystems.Secondary.ArmSubsystem;
 // import frc.robot.subsystems.Secondary.RotateSubsystem;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
@@ -36,6 +42,39 @@ import java.io.File;
  */
 public class RobotContainer
 {
+  public LimelightObjectDetection limelightObjectDetectionSubsystem;
+  public LimelightScoring limelightScoringSubSystem;
+  public enum PieceMode {
+    CONE,
+    CUBE
+  }
+
+  public enum ScoringHeight {
+    LOW,
+    MEDIUM,
+    HIGH
+  }
+
+  public enum RobotTranslationMode {
+    DRIVER,
+    SCORE_PIECE,
+    PIECE_TRACKING,
+    SLOW_MODE,
+    AUTO_PIECE_TRACKING
+  }
+
+  public enum RobotRotationMode {
+    DRIVER,
+    PIECE_TRACKING,
+    SCORE_PIECE
+  }
+
+  // public boolean visionEnabled = true;
+
+  public PieceMode pieceMode = PieceMode.CONE;
+  public ScoringHeight scoringHeight = ScoringHeight.HIGH;
+  public RobotTranslationMode robotTranslationMode = RobotTranslationMode.DRIVER;
+  public RobotRotationMode robotRotationMode = RobotRotationMode.DRIVER;
 
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
@@ -145,5 +184,24 @@ public class RobotContainer
   public void setMotorBrake(boolean brake)
   {
     drivebase.setMotorBrake(brake);
+  }
+  private void configureDefaultCommands() {
+
+    if (limelightObjectDetectionSubsystem != null) {
+      limelightObjectDetectionSubsystem.setDefaultCommand(
+          new DefaultLimelightObjectDectionCommand(limelightObjectDetectionSubsystem));
+    }
+
+    if (limelightScoringSubSystem != null) {
+      limelightScoringSubSystem.setDefaultCommand(
+          new DefaultLimelightScoringDectionCommand(limelightScoringSubSystem));
+    }
+  }
+  private void defineSubsystems() {
+      LimelightHelpers.profileJSON = true;
+      LimelightHelpers.getLatestResults("");
+
+      limelightObjectDetectionSubsystem = new LimelightObjectDetection();
+      limelightScoringSubSystem = new LimelightScoring();
   }
 }
